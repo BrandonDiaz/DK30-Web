@@ -1,5 +1,5 @@
 # DK30.IO
-[DK30.IO](http://dk30.io/) is a hub for others to share and explore DayKnight "30 day projects", and my way of giving back to the community. The application is built in [Node.js](https://nodejs.org/en/) running ontop of [Redis](https://redis.io/) and [MongoDB](https://www.mongodb.com/), and intended to be clustered with [PM2](https://github.com/Unitech/pm2).
+[DK30.IO](http://dk30.io/) is a hub for others to share and explore "30 day projects", and my way of giving back to the community. The application is built in [Node.js](https://nodejs.org/en/) running ontop of [Redis](https://redis.io/) and [MongoDB](https://www.mongodb.com/), and intended to be clustered with [PM2](https://github.com/Unitech/pm2).
 
 # Project Goals
 
