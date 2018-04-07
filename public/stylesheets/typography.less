@@ -1,0 +1,57 @@
+body, input {
+	color: @color-dark;
+	font-family: 'Roboto Condensed', 'Helvetica Neue', 'Helvetica', sans-serif;
+	font-size: 16px;
+}
+
+h2, h3, h4, h5, h6 {
+	font-weight: normal;
+}
+
+a, .anchor {
+	color: @color-links;
+	cursor: pointer;
+	text-decoration: none;
+	transition: background 0.15s ease-in-out, color 0.15s ease-in-out;
+
+	&:active, &:hover {
+		color: darken(@color-links, 10%);
+	}
+}
+
+.weight-bold {
+	font-weight: bold;
+}
+
+.meta {
+	color: lighten(@color-dark, 50%);
+}
+
+.text-left {
+	text-align: left;
+}
+
+.text-center {
+	text-align: center;
+}
+
+.text-right {
+	text-align: right;
+}
+
+.informational {
+	margin: 0 auto;
+	width: 60%;
+
+	h2, h3 {
+		font-size: 36px;
+	}
+
+	h3 {
+		padding-top: 30px;
+	}
+
+	p {
+		line-height: 24px;
+	}
+}

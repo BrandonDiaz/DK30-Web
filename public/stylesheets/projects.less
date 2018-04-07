@@ -1,0 +1,74 @@
+.project {
+	display: block;
+	padding-top: (2 / 3) * 100%;
+	position: relative;
+}
+
+.caption {
+	height: 80px;
+	line-height: 40px;
+	padding: 0 10px;
+
+	.goal {
+		display: block;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+		width: 100%;
+	}
+}
+
+.featured-project {
+	padding-right: 33%;
+	position: relative;
+
+	.placeholder {
+		color: fade(@color-dark, 75%);
+		left: 0;
+		line-height: 28px;
+		margin: auto;
+		padding-top: 5%;
+		position: absolute;
+		right: 0;
+		text-align: center;
+		top: 159px;
+		width: 60%;
+
+		.button {
+			display: inline-block;
+			margin-top: 35px;
+		}
+	}
+
+	.float-right {
+		background: @color-dark;
+		bottom: 0;
+		padding: 5%;
+		position: absolute;
+		right: 0;
+		text-align: center;
+		top: 0;
+		width: 23%;
+		
+		img {
+			border-radius: 100%;
+		}
+
+		h2 {
+			color: #ffffff;
+			font-weight: normal;
+			padding: 10px 0 15px 0;
+
+			em {
+				color: fade(#ffffff, 50%);
+				font-style: normal;
+			}
+		}
+
+		.button {
+			display: inline-block;
+			margin-top: 20px;
+			width: 128px;
+		}
+	}
+}

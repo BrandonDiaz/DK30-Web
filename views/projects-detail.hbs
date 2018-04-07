@@ -1,0 +1,90 @@
+<link href="/stylesheets/projects-details.css" rel="stylesheet"/>
+<div class="wrapper">
+	{{#unless project.visible}}
+		<div class="notice">
+			<b>Note:</b> This project is currently private. If you want to share it with the world, edit this project and set the visibility to "Public".
+		</div>
+	{{/unless}}
+	<section>
+		<div class="size-6">
+			<section class="project-masthead">
+				<div class="size-5 margin-left-0">
+					<h2>{{project.goal}}</h2>
+					<div class="float-left">
+						<a class="button owner" href="/users/{{project.owner.slug}}">
+							<img src="https://cdn.discordapp.com/avatars/{{project.owner.slug}}/{{project.owner.avatar}}.png"/>{{project.owner.name.discord}}
+							<em>#{{project.owner.name.discriminator}}</em>
+						</a> in <span class="category meta">#{{project.category}}</span>
+					</div>
+				</div>
+				<div class="size-1 text-right">
+					{{#if isOwner}}
+						<span class="button accent" modal="/projects/{{project.slug}}/edit"><i class="fas fa-cog"></i> Edit Project</span>
+					{{else}}
+						<!--<span class="button"><i class="fas fa-star"></i> Follow</span>-->
+					{{/if}}
+				</div>
+			</section>
+		</div>
+
+		<ul class="card-list size-4 margin-left-0">
+			{{#if isOwner}}
+				<li class="card card margin-bottom-25 clearfix">
+					<form action="/projects/{{project.slug}}/update" method="post" class="clear padding-25 update-form">
+						<section>
+							<textarea name="content" placeholder="{{prompt}}" required></textarea>
+							<ul class="media-links"></ul>
+							<div class="actions">
+								<span class="button float-left media-add">
+									<i class="fas fa-paperclip expand"></i>
+									<input type="text" placeholder="Paste Photo URL" />
+									<i class="fas fa-check confirm"></i>
+								</span>
+								<span class="button float-right accent submit"><i class="fas fa-plus"></i> Publish Update</span>
+							</div>
+						</section>
+					</form>
+				</li>
+			{{/if}}
+			{{#project.updates}}
+				<li class="card margin-bottom-25">
+					<section class="padding-25">
+						<div class="content">
+							{{{markdown content}}}
+						</div>
+						<hr />
+						{{#if media}}
+							<ul class="media-grid cleared">
+								{{#media}}
+									<li>
+										<a class="card" href="{{this}}" target="_blank" style="background-image: url({{this}});"></a>
+									</li>
+								{{/media}}
+							</ul>
+							<hr />
+						{{/if}}
+						<div class="meta">
+							Posted {{dateFormat created "MMMM Do, YYYY"}}
+						</div>
+					</section>
+				</li>
+			{{/project.updates}}
+		</ul>
+		<div class="size-2">
+			<div class="sidebar">
+				<h3>Estimated Timeframe</h3>
+				<p>
+					{{dateFormat project.start "MMMM Do, YYYY"}} to {{dateFormat project.end "MMMM Do, YYYY"}}
+				</p>
+				{{#project.milestones.weekly}}
+					{{#if this.length}}
+						<h3>Week {{math @index '+' 1}} Goal</h3>
+						<p>{{this}}</p>
+					{{/if}}
+				{{/project.milestones.weekly}}
+			</div>
+		</div>
+
+	</section>
+</div>
+<script src="/javascripts/projects-detail.js" type="text/javascript" async></script>

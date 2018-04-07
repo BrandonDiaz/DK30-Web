@@ -1,0 +1,36 @@
+.listing {
+	ul.list {
+		list-style: none;
+	}
+
+	.load-more {
+		background: darken(@color-light, 5%);
+		border-radius: 2px;
+		cursor: pointer;
+		color: darken(@color-light, 15%);
+		display: block;
+		height: 53px;
+		line-height: 53px;
+		margin-top: 20px;
+		overflow: hidden;
+		text-align: center;
+		transition: opacity 0.75s linear;
+
+		&:active, &:hover {
+			opacity: 0.5;
+		}
+
+		&.busy {
+			span {
+				top: -53px;
+			}
+		}
+
+		span {
+			display: block;
+			position: relative;
+			transition: top 0.6s cubic-bezier(0.075, 0.82, 0.165, 1);
+			top: 0;
+		}
+	}
+}

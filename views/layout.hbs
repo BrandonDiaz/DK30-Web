@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>{{ternary title title 'DK30.IO'}}</title>
+	<link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:400,700" rel="stylesheet">
+	<link href="/stylesheets/style.css" rel="stylesheet"/>
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.9/css/all.css" integrity="sha384-5SOiIsAziJl6AWe0HWRKTXlfcSHKmYV4RBF18PPJ173Kzn7jzMyFuTtk8JA7QQG1" crossorigin="anonymous"/>
+</head>
+<body>
+<div id="masthead">
+	<div class="wrapper">
+		<h1><a href="/"><span>DK30</span>.IO</a></h1>
+		<nav>
+			<ul>
+				{{#if user.slug}}
+					<li>
+						<a class="usercard" href="/users/{{user.slug}}">
+							<img src="https://cdn.discordapp.com/avatars/{{user.slug}}/{{user.avatar}}.png"/>{{user.name.discord}}
+							<em>#{{user.name.discriminator}}</em>
+						</a>
+					</li>
+					<li><a href="/users/auth/signout">Sign Out</a></li>
+				{{else}}
+					<li>
+						<a class="button discord" href="/users/auth/discord"><img src="/images/discord-glyph.png"/>Sign In</a>
+					</li>
+				{{/if}}
+				<li><a href="/about">About</a></li>
+				<li><a href="/">Explore</a></li>
+			</ul>
+		</nav>
+	</div>
+</div>
+{{{body}}}
+<div id="footer">
+	<div class="wrapper">
+		<div class="float-left">
+			<ul>
+				<li>
+					<a href="https://github.com/BrandonDiaz/DK30-Web" target="_blank">Contribute</a>
+				</li>
+				<li>
+					<a href="https://day9.tv/" target="_blank">Day[9]TV</a>
+				</li>
+			</ul>
+		</div>
+		<div class="float-right">
+			Created with <em>&hearts;</em> by Rezeyu
+		</div>
+	</div>
+</div>
+<div id="modal-wrapper"></div>
+<script data-main="/javascripts/main" src="/javascripts/vendor/require.min.js"></script>
+<script src="https://www.googletagmanager.com/gtag/js?id={{ga_id}}" async></script>
+<script>
+	window.dataLayer = window.dataLayer || [];
+
+	function gtag() {
+		dataLayer.push(arguments);
+	}
+
+	gtag('js', new Date());
+	gtag('config', '{{ga_id}}');
+</script>
+</body>
+</html>

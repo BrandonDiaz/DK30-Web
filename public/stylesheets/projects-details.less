@@ -1,0 +1,187 @@
+@import 'animations';
+@import 'variables';
+
+.project-masthead {
+	border-bottom: 1px solid darken(@color-light, 5%);
+	line-height: 36px;
+	margin-bottom: 25px;
+	padding-bottom: 20px;
+
+	.owner {
+		color: @color-dark;
+		padding: 0;
+
+		em {
+			color: fade(@color-dark, 50%);
+			font-style: normal;
+		}
+
+		img {
+			border-radius: 100%;
+		}
+	}
+}
+
+.sidebar {
+	padding-left: 10%;
+
+	h3 {
+		border-bottom: 1px solid darken(@color-light, 5%);
+		margin-bottom: 15px;
+		margin-top: 40px;
+		padding-bottom: 10px;
+
+		&:first-child {
+			margin-top: 0;
+		}
+	}
+
+	p {
+		color: lighten(@color-dark, 50%);
+	}
+
+	ul {
+		list-style: none;
+
+		li {
+			.fas {
+				color: lighten(@color-dark, 50%);
+			}
+		}
+	}
+}
+
+.update-form {
+	section {
+		padding: 0;
+	}
+
+	textarea {
+		margin-bottom: 10px;
+	}
+
+	.media-links {
+		list-style: none;
+
+		li {
+			.fadeInUp;
+			margin-bottom: 15px;
+			position: relative;
+
+			input {
+				color: darken(@color-light, 5%);
+				cursor: default;
+			}
+
+			.fas {
+				background: darken(@color-light, 5%);
+				color: white;
+				cursor: pointer;
+				padding: 11px;
+				position: absolute;
+				right: 0;
+				text-align: center;
+				width: 16px;
+
+				&:hover {
+					opacity: 0.75;
+				}
+			}
+		}
+	}
+
+	.actions {
+		line-height: 51px;
+
+		.media-add {
+			background: #ffffff;
+			border: 1px solid @color-light;
+			height: 49px;
+			overflow: hidden;
+			padding: 0;
+			transition: border-color 0.5s ease, width 0.5s cubic-bezier(0.785, 0.135, 0.15, 0.86);
+			width: 49px;
+
+			&:hover {
+				border: 1px solid darken(@color-light, 5%);
+			}
+
+			&.expanded {
+				border: 1px solid darken(@color-light, 5%);
+				width: 298px;
+
+				.fas {
+					&.confirm {
+						opacity: 0.5;
+					}
+				}
+
+				input {
+					opacity: 1;
+				}
+			}
+
+			.fas, input {
+				float: left;
+			}
+
+			.fas {
+				color: darken(@color-light, 5%);
+				margin: 0;
+				margin-left: 1px;
+				padding: 16px;
+				transition: color 0.5s ease, opacity 0.5s 0.5s linear;
+				width: 16px;
+
+				&:hover {
+					color: darken(@color-light, 20%);
+				}
+
+				&.confirm {
+					color: @color-links;
+					opacity: 0;
+
+					&:hover {
+						opacity: 1;
+					}
+				}
+			}
+
+			input {
+				border: none;
+				height: 50px;
+				line-height: 50px;
+				opacity: 0;
+				transition: opacity 1s linear;
+				width: 200px;
+			}
+		}
+	}
+}
+
+.media-grid {
+	display: block;
+	list-style: none;
+	margin: 0 -1%;
+
+	li {
+		float: left;
+		padding: 1%;
+		width: 23%;
+
+		.card {
+			background-size: cover;
+			background-position: center center;
+			background-repeat: no-repeat;
+			cursor: pointer;
+			display: block;
+			height: 0;
+            padding-bottom: 100%;
+			transition: opacity 0.5s linear;
+
+			&:hover {
+				opacity: 0.75;
+			}
+		}
+	}
+}

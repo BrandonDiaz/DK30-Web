@@ -1,0 +1,14 @@
+<{{ternary static 'span' 'a'}} href="/projects/{{slug}}" class="project" color="{{card.background.color}}" pattern="{{card.background.pattern}}">
+
+</{{ternary static 'span' 'a'}}>
+{{#unless cardOnly}}
+	<div class="caption">
+		<span class="goal">{{goal}}</span>
+		<div class="meta">
+			<span class="date float-left">
+				{{dateFormat start "MMM DD"}} to {{dateFormat end "MMM DD"}}
+			</span>
+			<span class="category float-right">#{{category}}</span>
+		</div>
+	</div>
+{{/unless}}

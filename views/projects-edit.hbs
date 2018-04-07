@@ -1,0 +1,159 @@
+<div class="header">
+	<h4>Edit Project</h4>
+	<ul class="tabs">
+		<li class="active">Basic Info</li>
+		<li>Milestones</li>
+		<li>External Links</li>
+		<li>Card Design</li>
+	</ul>
+</div>
+<form method="post" action="/projects/{{project.slug}}/edit">
+	<section class="wrapper tabbed">
+		<div class="tab">
+			<div class="size-6 cleared margin-left-0">
+				<label>
+					<span class="title">Goal <em>(Short and sweet)</em></span>
+					<input name="goal" type="text" value="{{project.goal}}" required />
+				</label>
+			</div>
+			<div class="size-6 cleared margin-left-0">
+				<label>
+					<span class="title">Description</span>
+					<textarea name="description">{{project.description}}</textarea>
+				</label>
+			</div>
+			<div class="size-3 margin-left-0">
+				<label>
+					<span class="title">Category</span>
+					<a href="#" class="select">
+						<input name="category" type="hidden" value="{{project.category}}"/>
+						<div class="input"></div>
+						<ul>
+							<li value="Other">Other</li>
+							<li value="CraftsAndCosplay">Crafts and Cosplay</li>
+							<li value="CodeAndEngineering">Code and Engineering</li>
+							<li value="EducationAndCareer">Education and Career</li>
+							<li value="GameDev">Game Development</li>
+							<li value="GamesAndStreams">Games and Streams</li>
+							<li value="HealthAndFitness">Health and Fitness</li>
+							<li value="Music">Music</li>
+							<li value="VisualArt">Visual Art</li>
+							<li value="Writing">Writing</li>
+						</ul>
+					</a>
+				</label>
+			</div>
+			<div class="size-3">
+				<label>
+					<span class="title">Visiblity</span>
+					<a href="#" class="select">
+						<input name="visible" type="hidden" value="{{ternary project.visible 'true' 'false'}}"/>
+						<div class="input"></div>
+						<ul>
+							<li value="false">Private</li>
+							<li value="true">Public</li>
+						</ul>
+					</a>
+				</label>
+			</div>
+			<div class="size-6 cleared margin-left-0">
+				<label>
+					<span class="title">Tags <em>(Comma Separated)</em></span>
+					<input name="tags" type="text" value="{{join project.tags}}"/>
+				</label>
+			</div>
+		</div>
+		<div class="tab">
+			<div class="size-6 cleared margin-left-0">
+				{{#project.milestones.weekly}}
+					<label>
+						<span class="title">Week {{math @index '+' 1}} Goal</span>
+						<input name="milestones[weekly][{{@index}}]" type="text" value="{{this}}" />
+					</label>
+				{{/project.milestones.weekly}}
+			</div>
+		</div>
+		<div class="tab">
+			<p class="text-center">Coming Soon&trade;</p>
+		</div>
+		<div class="tab">
+			<div class="size-3">
+				<label>
+					<span class="title">Background Color</span>
+					<a href="#" class="select">
+						<input name="card[background][color]" type="hidden" value="{{project.card.background.color}}"/>
+						<div class="input"></div>
+						<ul>
+							{{> colors_list}}
+						</ul>
+					</a>
+				</label>
+			</div>
+			<div class="size-3">
+				<label>
+					<span class="title">Background Pattern</span>
+					<a href="#" class="select">
+						<input name="card[background][pattern]" type="hidden" value="{{project.card.background.pattern}}"/>
+						<div class="input"></div>
+						<ul>
+							<li value="default">No Pattern</li>
+							<li value="circles">Circles</li>
+							<li value="zigzag">Zigzag</li>
+						</ul>
+					</a>
+				</label>
+			</div>
+			<div class="size-3">
+				<label class="margin-bottom-0">
+					<span class="title">Shapes and Text</span>
+				</label>
+				<ul class="layerlist">
+					{{#project.card.layers}}
+						<li class="layer">
+							<div class="size-3 margin-left-0">
+								<label>
+									<a href="#" class="select">
+										<input name="card[layers][{{@index}}][type]" type="hidden" value="{{type}}"/>
+										<div class="input"></div>
+										<ul>
+											<li value="none">Empty Layer</li>
+											<li value="circle">Circle</li>
+											<li value="diamond">Diamond</li>
+											<li value="square">Square</li>
+										</ul>
+									</a>
+								</label>
+							</div>
+							<div class="size-3">
+								<label>
+									<a href="#" class="select">
+										<input name="card[layers][{{@index}}][color]" type="hidden" value="{{color}}"/>
+										<div class="input"></div>
+										<ul>
+											{{> colors_list}}
+										</ul>
+									</a>
+								</label>
+							</div>
+						</li>
+					{{/project.card.layers}}
+				</ul>
+			</div>
+			<div class="size-3">
+				<div class="size-6">
+					<label class="margin-bottom-0">
+						<span class="title">Card Preview</span>
+					</label>
+					<div class="card">
+						{{> project_card project}}
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<div class="actions">
+		<span class="button accent submit float-right"><i class="fas fa-check"></i> Save Changes</span>
+		<span class="button transparent cancel padding-left-0 float-left">Cancel</span>
+	</div>
+</form>
+<script src="/javascripts/projects-edit.js" type="text/javascript" async></script>
