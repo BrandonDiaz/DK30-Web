@@ -1,5 +1,9 @@
 requirejs(['/javascripts/vendor/jquery.min.js'], function() {
 	$(document).ready(function () {
+		if (window.location.hash && window.location.hash == '#edit') {
+			showModal(window.location.pathname + '/edit');
+		}
+		
 		$('.media-add .expand').on('click', function () {
 			$(this).closest('.media-add').toggleClass('expanded');
 		});

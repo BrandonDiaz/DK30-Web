@@ -24,7 +24,7 @@ router.get('/new', function (req, res, next) {
 			return false;
 		}
 		
-		res.redirect('/projects/' + slug);
+		res.redirect('/projects/' + slug + '#edit');
 	});
 });
 
