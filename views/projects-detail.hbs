@@ -5,28 +5,25 @@
 			<b>Note:</b> This project is currently private. If you want to share it with the world, edit this project and set the visibility to "Public".
 		</div>
 	{{/unless}}
-	<section>
-		<div class="size-6">
-			<section class="project-masthead">
-				<div class="size-5 margin-left-0">
-					<h2>{{project.goal}}</h2>
-					<div class="float-left">
-						<a class="button owner" href="/users/{{project.owner.slug}}">
-							<img src="https://cdn.discordapp.com/avatars/{{project.owner.slug}}/{{project.owner.avatar}}.png"/>{{project.owner.name.discord}}
-							<em>#{{project.owner.name.discriminator}}</em>
-						</a> in <span class="category meta">#{{project.category}}</span>
-					</div>
-				</div>
-				<div class="size-1 text-right">
-					{{#if isOwner}}
-						<span class="button accent" modal="/projects/{{project.slug}}/edit"><i class="fas fa-cog"></i> Edit Project</span>
-					{{else}}
-						<!--<span class="button"><i class="fas fa-star"></i> Follow</span>-->
-					{{/if}}
-				</div>
-			</section>
+	<section class="project-masthead">
+		<div class="size-5 margin-left-0">
+			<h2>{{project.goal}}</h2>
+			<div class="float-left">
+				<a class="button owner" href="/users/{{project.owner.slug}}">
+					<img src="https://cdn.discordapp.com/avatars/{{project.owner.slug}}/{{project.owner.avatar}}.png"/>{{project.owner.name.discord}}
+					<em>#{{project.owner.name.discriminator}}</em>
+				</a> in <span class="category meta">#{{project.category}}</span>
+			</div>
 		</div>
-
+		<div class="size-1 text-right">
+			{{#if isOwner}}
+				<span class="button accent" modal="/projects/{{project.slug}}/edit"><i class="fas fa-cog"></i> Edit Project</span>
+			{{else if user.slug}}
+				<a class="button {{ternary isFollowing 'grey' 'action'}}" href="/projects/{{project.slug}}/follow"><i class="fas fa-star"></i> {{ternary isFollowing 'Unfollow' 'Follow'}}</a>
+			{{/if}}
+		</div>
+	</section>
+	<section>
 		<ul class="card-list size-4 margin-left-0">
 			{{#if isOwner}}
 				<li class="card card margin-bottom-25 clearfix">
@@ -37,7 +34,7 @@
 							<div class="actions">
 								<span class="button float-left media-add">
 									<i class="fas fa-paperclip expand"></i>
-									<input type="text" placeholder="Paste Photo URL" />
+									<input type="text" placeholder="Paste Photo URL"/>
 									<i class="fas fa-check confirm"></i>
 								</span>
 								<span class="button float-right accent submit"><i class="fas fa-plus"></i> Publish Update</span>
@@ -49,10 +46,12 @@
 			{{#project.updates}}
 				<li class="card margin-bottom-25">
 					<section class="padding-25">
-						<div class="content">
-							{{{markdown content}}}
-						</div>
-						<hr />
+						{{#if content}}
+							<div class="content">
+								{{{markdown content}}}
+							</div>
+							<hr/>
+						{{/if}}
 						{{#if media}}
 							<ul class="media-grid cleared">
 								{{#media}}
@@ -61,10 +60,10 @@
 									</li>
 								{{/media}}
 							</ul>
-							<hr />
+							<hr/>
 						{{/if}}
-						<div class="meta">
-							Posted {{dateFormat created "MMMM Do, YYYY"}}
+						<div class="meta float-right">
+							{{dateFormat created "MMMM Do, YYYY [at] h:mma"}}
 						</div>
 					</section>
 				</li>
@@ -82,6 +81,16 @@
 						<p>{{this}}</p>
 					{{/if}}
 				{{/project.milestones.weekly}}
+				{{#if project.tags}}
+					<h3>Tags</h3>
+					<ul class="tags">
+						{{#project.tags}}
+							<li>
+								<a href="/?search={{.}}">{{.}}</a>
+							</li>
+						{{/project.tags}}
+					</ul>
+				{{/if}}
 			</div>
 		</div>
 

@@ -10,7 +10,10 @@ router.get('/', function(req, res, next) {
 	
 	Project.find(filters, function(err, projects){
 		res.render('explore', {
-			projects : projects
+			projects : projects,
+			filters  : {
+				search : req.query.search || ''
+			}
 		});
 	});
 });

@@ -5,6 +5,7 @@
 	<link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:400,700" rel="stylesheet">
 	<link href="/stylesheets/style.css" rel="stylesheet"/>
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.9/css/all.css" integrity="sha384-5SOiIsAziJl6AWe0HWRKTXlfcSHKmYV4RBF18PPJ173Kzn7jzMyFuTtk8JA7QQG1" crossorigin="anonymous"/>
+	<script data-main="/javascripts/main" src="/javascripts/vendor/require.min.js"></script>
 </head>
 <body>
 <div id="masthead">
@@ -27,6 +28,9 @@
 				{{/if}}
 				<li><a href="/about">About</a></li>
 				<li><a href="/">Explore</a></li>
+				{{#if user.slug}}
+					<li><a href="/projects/feed">Feed</a></li>
+				{{/if}}
 			</ul>
 		</nav>
 	</div>
@@ -50,7 +54,6 @@
 	</div>
 </div>
 <div id="modal-wrapper"></div>
-<script data-main="/javascripts/main" src="/javascripts/vendor/require.min.js"></script>
 <script src="https://www.googletagmanager.com/gtag/js?id={{ga_id}}" async></script>
 <script>
 	window.dataLayer = window.dataLayer || [];

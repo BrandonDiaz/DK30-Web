@@ -43,6 +43,21 @@
 	ul {
 		list-style: none;
 
+		&.tags {
+			li {
+				background: darken(@color-light, 5%);
+				border-radius: 14px;
+				color: lighten(@color-dark, 50%);
+				display: inline-block;
+				margin-left: 6px;
+				padding: 4px 10px;
+
+				&:first-child {
+					margin: 0;
+				}
+			}
+		}
+
 		li {
 			.fas {
 				color: lighten(@color-dark, 50%);

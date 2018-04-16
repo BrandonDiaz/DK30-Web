@@ -21,7 +21,7 @@ If you're not a developer, you can submit any bugs you've found by [submitting a
 
 # Configuration
 
-At a minimum, you'll need Node.js installed, and access to a MongoDB database. There's a shell script in the project root that will install the npm modules and create your .env file to fill out:
+At a minimum, you'll need Node.js installed, a LESS compiler, and access to a MongoDB database. There's a shell script in the project root that will install the npm modules and create your .env file to fill out:
 
 `$ sh bootstrap.sh`
 

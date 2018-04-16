@@ -10,7 +10,7 @@ router.get('/auth/discord', passport.authenticate('discord'));
 router.get('/auth/discord/callback', passport.authenticate('discord', {
     failureRedirect: '/'
 }), function(req, res) {
-    res.redirect('/users/' + req.user.id);
+    res.redirect('/projects/feed');
 });
 
 router.get('/auth/signout', function(req, res) {

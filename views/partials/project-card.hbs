@@ -4,10 +4,11 @@
 {{#unless cardOnly}}
 	<div class="caption">
 		<span class="goal">{{goal}}</span>
-		<div class="meta">
-			<span class="date float-left">
-				{{dateFormat start "MMM DD"}} to {{dateFormat end "MMM DD"}}
-			</span>
+		<div class="meta cleared    ">
+			<a class="button owner float-left" href="/users/{{owner.slug}}">
+				<img src="https://cdn.discordapp.com/avatars/{{owner.slug}}/{{owner.avatar}}.png" />
+				{{owner.name.discord}}<em>#{{owner.name.discriminator}}</em>
+			</a>
 			<span class="category float-right">#{{category}}</span>
 		</div>
 	</div>

@@ -1,0 +1,64 @@
+<link href="/stylesheets/projects-feed.css" rel="stylesheet"/>
+<div class="wrapper">
+	<section class="masthead">
+		<div class="size-5 margin-left-0">
+			<h2>Activity Feed</h2>
+		</div>
+		<div class="size-1 text-right">
+			<a href="/projects/new" class="button accent"><i class="fas fa-plus"></i> New Project</a>
+		</div>
+	</section>
+	<section>
+		<ul class="card-list size-6 margin-left-0">
+			{{#unless updates}}
+				<li class="placeholder meta text-center padding-25">
+					You aren't following any projects yet, or none of your followed projects have posted anything recently.
+				</li>
+			{{/unless}}
+			{{#updates}}
+				<li class="card margin-bottom-25">
+					<section class="padding-25">
+						<div class="cleared">
+							<div class="float-left">
+								<a href="/projects/{{project.slug}}">
+									{{project.goal}}
+								</a>
+							</div>
+							<div class="meta float-right">
+								#{{project.category}}
+							</div>
+						</div>
+						<hr/>
+						{{#if content}}
+							<div class="content">
+								{{{markdown content}}}
+							</div>
+							<hr/>
+						{{/if}}
+						{{#if media}}
+							<ul class="media-grid cleared">
+								{{#media}}
+									<li>
+										<a class="card" href="{{this}}" target="_blank" style="background-image: url({{this}});"></a>
+									</li>
+								{{/media}}
+							</ul>
+							<hr/>
+						{{/if}}
+						<div class="cleared">
+							<div class="float-left">
+								<a class="button owner" href="/users/{{project.owner.slug}}">
+									<img src="https://cdn.discordapp.com/avatars/{{project.owner.slug}}/{{project.owner.avatar}}.png"/>{{project.owner.name.discord}}
+									<em>#{{project.owner.name.discriminator}}</em>
+								</a>
+							</div>
+							<div class="meta float-right">
+								{{dateFormat created "MMMM Do, YYYY [at] h:mma"}}
+							</div>
+						</div>
+					</section>
+				</li>
+			{{/updates}}
+		</ul>
+	</section>
+</div>

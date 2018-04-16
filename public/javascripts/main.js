@@ -1,43 +1,13 @@
-requirejs(['/javascripts/vendor/jquery.min.js'], function() {
+requirejs([
+	'/javascripts/vendor/jquery.min.js',
+	'/javascripts/vendor/underscore.min.js'
+], function() {
 	$(document).ready(function () {
 		$('[modal]').on('click', function(){
 			var url = $(this).attr('modal');
 			
-			$('#modal-wrapper').addClass('visible');
-			
-			$.get(url, function(result){
-				$('#modal-wrapper').after(result);
-			});
+			showModal(url);
 		});
-		
-		
-		$('.load-more').on('click', function(){
-			if ($(this).hasClass('busy')) {
-				return false;
-			}
-			
-			var listing = $(this).closest('.listing');
-			var self = $(this);
-			var page = parseInt(listing.attr('page'));
-			
-			listing.attr('page', page + 1);
-			
-			$.get(listing.attr('source') + page, function(results){
-				listing.find('.list').append(results);
-				
-				self.removeClass('busy');
-				
-				// Listings always return results in sets of 9. If there are any less, there are none remaining.
-				if (results.length == 9) {
-					self.removeClass('hidden');
-				} else {
-					self.addClass('hidden');
-				}
-			});
-		});
-		
-		// If there's a listing on the page, trigger the first load.
-		$('.load-more').trigger('click');
 		
 		$('body').on('click', '.modal .cancel', function(){
 			if ($('.modal').length <= 1) {
@@ -77,3 +47,11 @@ requirejs(['/javascripts/vendor/jquery.min.js'], function() {
 		});
 	});
 });
+
+function showModal(url){
+	$('#modal-wrapper').addClass('visible');
+	
+	$.get(url, function(result){
+		$('#modal-wrapper').after(result);
+	});
+}

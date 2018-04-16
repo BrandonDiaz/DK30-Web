@@ -1,5 +1,6 @@
 var express   = require('express');
 var striptags = require('striptags');
+var mongoose  = require('mongoose');
 var cache     = require('express-redis-cache')();
 var router    = express.Router();
 
@@ -35,11 +36,64 @@ router.get('/list/:page', function (req, res, next) {
 		'visible': true
 	};
 	
+	if (req.query.search.trim()) {
+		filters['$text'] = {
+			'$search' : req.query.search
+		};
+	}
+	
 	// Paginate and return markup for insertion.
-	Project.find(filters).skip((count * req.params.page)).limit(count).exec(function (err, projects) {
+	Project.find(filters, {
+		score : { $meta: 'textScore' }
+	}).skip((count * req.params.page)).limit(count).sort( {
+		score : { $meta : 'textScore' }
+	}).exec(function (err, projects) {
+		console.log('RESPONSE', err, projects);
+		
 		res.render('projects-list', {
 			layout: false,
 			projects: projects
+		});
+	});
+});
+
+// Display a feed of recent activity for "followed" projects.
+router.get('/feed', function (req, res, next) {
+	Project.find({
+		'followers': mongoose.Types.ObjectId(res.locals.user._id)
+	}, function (err, projects) {
+		if (err) {
+			res.redirect('/error/404');
+			return false;
+		}
+		
+		var updates = [];
+		
+		// This is incredibly suboptimal, a side effect of the currently nested structure of updates.
+		// Could be optimized by grabbing recently optimized projects first, or replaced when updates are separate documents.
+		projects.forEach(function(project){
+			if (project.updates.length) {
+				project.updates.map(function(update){
+					update.project = {
+						slug     : project.slug,
+						goal     : project.goal,
+						owner    : project.owner,
+						category : project.category
+					}
+				});
+				
+				updates = updates.concat(project.updates);
+			}
+		});
+		
+		if (updates.length) {
+			updates.sort(function(a, b){
+				return b.created - a.created;
+			})
+		}
+		
+		res.render('projects-feed', {
+			updates : updates.slice(0, 20)
 		});
 	});
 });
@@ -150,6 +204,43 @@ router.post('/:slug/update', function (req, res, next) {
 	});
 });
 
+// This is GET for now, but it should really be an AJAX action
+router.get('/:slug/follow', function (req, res, next) {
+	if (!res.locals.user) {
+		res.redirect('/projects/' + req.params.slug);
+		return false;
+	}
+	
+	Project.findOne({
+		'slug': req.params.slug
+	}, function (err, project) {
+		if (err || !project) {
+			res.redirect('/error');
+			return false;
+		}
+		
+		// If they're already following it.. unfollow it. Otherwise, start stalking.
+		var operator = project.followers.indexOf(mongoose.Types.ObjectId(res.locals.user._id)) > -1 ? '$pull' : '$push';
+		var update = {};
+		
+		update[operator] = {
+			'followers' : mongoose.Types.ObjectId(res.locals.user._id)
+		};
+		
+		Project.update({
+			'slug': req.params.slug
+		}, update, function (err) {
+			if (err) {
+				res.redirect('/error');
+				return false;
+			}
+			
+			// Everything good? Kick them back to the project page.
+			res.redirect('/projects/' + req.params.slug);
+		});
+	});
+});
+
 // Display a project's details.
 router.get('/:slug', function (req, res, next) {
 	var prompts = [
@@ -160,7 +251,8 @@ router.get('/:slug', function (req, res, next) {
 	Project.findOne({
 		'slug': req.params.slug
 	}, function (err, project) {
-		var isOwner = res.locals.user && res.locals.user.slug == project.owner.slug;
+		var isOwner     = res.locals.user && res.locals.user.slug == project.owner.slug;
+		var isFollowing = res.locals.user && project.followers.indexOf(mongoose.Types.ObjectId(res.locals.user._id)) > -1;
 		
 		if (err || !project || (!project.visible && !isOwner)) {
 			res.redirect('/error/404');
@@ -168,7 +260,7 @@ router.get('/:slug', function (req, res, next) {
 		}
 		
 		project.static   = true;
-		project.cardOnly = true;
+		project.cardOnly = true;                         
 		
 		// Updates are stored chronologically, but the feed is reverse chronological.
 		project.updates.reverse();
@@ -179,9 +271,10 @@ router.get('/:slug', function (req, res, next) {
 		}
 		
 		res.render('projects-detail', {
-			project: project,
-			isOwner: isOwner,
-			prompt: prompts[Math.floor(Math.random() * prompts.length)]
+			project     : project,
+			isOwner     : isOwner,
+			isFollowing : isFollowing,
+			prompt      : prompts[Math.floor(Math.random() * prompts.length)]
 		});
 	});
 });
