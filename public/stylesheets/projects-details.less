@@ -86,16 +86,21 @@
 			input {
 				color: darken(@color-light, 5%);
 				cursor: default;
+				height: 50px;
+				line-height: 50px;
+				padding-left: 60px;
 			}
 
 			.fas {
 				background: darken(@color-light, 5%);
 				color: white;
 				cursor: pointer;
-				padding: 11px;
+				left: 0;
+				padding: 17px;
+				opacity: 1;
 				position: absolute;
-				right: 0;
 				text-align: center;
+				transition: opacity 0.5s linear;
 				width: 16px;
 
 				&:hover {
@@ -123,11 +128,11 @@
 
 			&.expanded {
 				border: 1px solid darken(@color-light, 5%);
-				width: 298px;
+				width: 302px;
 
 				.fas {
 					&.confirm {
-						opacity: 0.5;
+						opacity: 1;
 					}
 				}
 
@@ -144,8 +149,8 @@
 				color: darken(@color-light, 5%);
 				margin: 0;
 				margin-left: 1px;
-				padding: 16px;
-				transition: color 0.5s ease, opacity 0.5s 0.5s linear;
+				padding: 17px;
+				transition: color 0.5s ease, opacity 1s linear;
 				width: 16px;
 
 				&:hover {
@@ -153,11 +158,12 @@
 				}
 
 				&.confirm {
-					color: @color-links;
+					background: @color-links;
+					color: #ffffff;
 					opacity: 0;
 
 					&:hover {
-						opacity: 1;
+						opacity: 0.75;
 					}
 				}
 			}

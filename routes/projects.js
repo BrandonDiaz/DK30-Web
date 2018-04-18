@@ -5,8 +5,9 @@ var cache     = require('express-redis-cache')();
 var router    = express.Router();
 
 var Project = require('../models/project');
+var protected = require('../middleware/protected');
 
-router.get('/new', function (req, res, next) {
+router.get('/new', protected, function (req, res, next) {
 	// TODO: We'll want to limit the number of active projects, something like 10.
 	var slug    = res.locals.user.slug + '-' + Date.now();
 	var project = new Project({
@@ -58,7 +59,7 @@ router.get('/list/:page', function (req, res, next) {
 });
 
 // Display a feed of recent activity for "followed" projects.
-router.get('/feed', function (req, res, next) {
+router.get('/feed', protected, function (req, res, next) {
 	Project.find({
 		'followers': mongoose.Types.ObjectId(res.locals.user._id)
 	}, function (err, projects) {
@@ -99,7 +100,7 @@ router.get('/feed', function (req, res, next) {
 });
 
 // Return a modal edit form for a project.
-router.get('/:slug/edit', function (req, res, next) {
+router.get('/:slug/edit', protected, function (req, res, next) {
 	Project.findOne({
 		'slug': req.params.slug
 	}, function (err, project) {
@@ -120,7 +121,7 @@ router.get('/:slug/edit', function (req, res, next) {
 });
 
 // Edit form posts here to update a project
-router.post('/:slug/edit', function (req, res, next) {
+router.post('/:slug/edit', protected, function (req, res, next) {
 	var update = {
 		'goal': req.body.goal,
 		'description': req.body.description,
@@ -164,7 +165,7 @@ router.post('/:slug/edit', function (req, res, next) {
 	});
 });
 
-router.post('/:slug/update', function (req, res, next) {
+router.post('/:slug/update', protected, function (req, res, next) {
 	var update = {
 		'content': striptags(req.body.content),
 		'media': req.body.media
@@ -205,7 +206,7 @@ router.post('/:slug/update', function (req, res, next) {
 });
 
 // This is GET for now, but it should really be an AJAX action
-router.get('/:slug/follow', function (req, res, next) {
+router.get('/:slug/follow', protected, function (req, res, next) {
 	if (!res.locals.user) {
 		res.redirect('/projects/' + req.params.slug);
 		return false;
