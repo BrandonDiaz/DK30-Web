@@ -47,7 +47,8 @@ router.get('/list/:page', function (req, res, next) {
 	Project.find(filters, {
 		score : { $meta: 'textScore' }
 	}).skip((count * req.params.page)).limit(count).sort( {
-		score : { $meta : 'textScore' }
+		priority : 1,
+		score    : { $meta : 'textScore' }
 	}).exec(function (err, projects) {
 		console.log('RESPONSE', err, projects);
 		

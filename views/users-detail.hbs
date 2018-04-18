@@ -2,15 +2,13 @@
 <div class="wrapper">
 	<section class="user-masthead">
 		<div class="float-left">
-			<img src="https://cdn.discordapp.com/avatars/{{profile.slug}}/{{profile.avatar}}.png" />
-			<h2>{{profile.name.discord}}<em>#{{profile.name.discriminator}}</em></h2>
+			<h2>{{> user_card profile}}</h2>
 		</div>
 		<div class="float-right">
 			<a href="/projects/new" class="button accent"><i class="fas fa-plus"></i> New Project</a>
 		</div>
 	</section>
 	<section>
-
 		{{#projects}}
 			<div class="card size-2">
 				{{> project_card}}

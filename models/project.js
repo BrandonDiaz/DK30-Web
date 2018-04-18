@@ -9,7 +9,7 @@ var ProjectSchema = new mongoose.Schema({
 	tags: [String],
 	owner: User.schema,
 	followers: [mongoose.Schema.Types.ObjectId],
-	karma: {type: Number, default: 0},
+	priority: {type: Number, default: 0},
 	card: {
 		background: {
 			color: {type: String, default: 'default'},

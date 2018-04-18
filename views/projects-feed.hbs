@@ -48,8 +48,7 @@
 						<div class="cleared">
 							<div class="float-left">
 								<a class="button owner" href="/users/{{project.owner.slug}}">
-									<img src="https://cdn.discordapp.com/avatars/{{project.owner.slug}}/{{project.owner.avatar}}.png"/>{{project.owner.name.discord}}
-									<em>#{{project.owner.name.discriminator}}</em>
+									{{> user_card project.owner}}
 								</a>
 							</div>
 							<div class="meta float-right">

@@ -16,8 +16,7 @@
 				{{#if user.slug}}
 					<li>
 						<a class="usercard" href="/users/{{user.slug}}">
-							<img src="https://cdn.discordapp.com/avatars/{{user.slug}}/{{user.avatar}}.png"/>{{user.name.discord}}
-							<em>#{{user.name.discriminator}}</em>
+							{{> user_card user}}
 						</a>
 					</li>
 					<li><a href="/users/auth/signout">Sign Out</a></li>

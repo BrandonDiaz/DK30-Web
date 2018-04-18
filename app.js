@@ -1,6 +1,7 @@
 var express        = require('express');
 var path           = require('path');
 var hbs            = require('hbs');
+var cron           = require('node-cron');
 var mongoose       = require('mongoose');
 var favicon        = require('serve-favicon');
 var markdown       = require('markdown').markdown;
@@ -10,15 +11,16 @@ var cookieParser   = require('cookie-parser');
 var bodyParser     = require('body-parser');
 var lessMiddleware = require('less-middleware');
 
-var passport = require('passport');
-var refresh  = require('passport-oauth2-refresh');
+var passport   = require('passport');
+var refresh    = require('passport-oauth2-refresh');
 var strategies = require('./strategies');
 
 var index    = require('./routes/index');
 var projects = require('./routes/projects');
 var users    = require('./routes/users');
 
-var User = require('./models/user');
+var Project = require('./models/project');
+var User    = require('./models/user');
 
 var app = express();
 
@@ -104,6 +106,19 @@ hbs.registerHelper('math', function (value_1, operator, value_2) {
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
+
+// This runs periodically, creating a pseudo-random sort order for projects.
+// If clustered in PM2, only the original process should run this.
+if (!process.env.NODE_APP_INSTANCE || process.env.NODE_APP_INSTANCE === '0'){
+	cron.schedule(process.env.CRON_INTERVAL, function(){
+		Project.find({}, function (err, projects) {
+			projects.forEach(function(project){
+				project.priority = Math.random();
+				project.save();
+			})
+		})
+	});
+}
 
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));

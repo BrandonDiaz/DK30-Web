@@ -6,8 +6,7 @@
 		<span class="goal">{{goal}}</span>
 		<div class="meta cleared    ">
 			<a class="button owner float-left" href="/users/{{owner.slug}}">
-				<img src="https://cdn.discordapp.com/avatars/{{owner.slug}}/{{owner.avatar}}.png" />
-				{{owner.name.discord}}<em>#{{owner.name.discriminator}}</em>
+				{{> user_card owner}}
 			</a>
 			<span class="category float-right">#{{category}}</span>
 		</div>
