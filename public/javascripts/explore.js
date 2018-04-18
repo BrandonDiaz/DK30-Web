@@ -5,13 +5,10 @@ requirejs([
 	$(document).ready(function () {
 		$('.filters .search input').on('keyup keydown', _.debounce(function () {
 			var listing = $('.project-listing');
-			var terms = $(this).val();
 			
 			listing.attr('page', 0);
 
-			getProjects(function(){
-				console.log('TERMS', terms);
-			});
+			getProjects();
 		}, 300));
 		
 		$('.load-more').on('click', function(){
@@ -44,15 +41,15 @@ function getProjects(callback){
 			listing.find('.list').empty();
 		}
 		
-		listing.attr('page', page + 1);
-		listing.find('.list').append(results);
-		
 		// Listings always return results in sets of 9. If there are any less, there are none remaining.
-		if (results.length == 9) {
+		if ($(results).closest('.card').length >= 9) {
 			listing.find('.load-more').removeClass('hidden');
 		} else {
 			listing.find('.load-more').addClass('hidden');
 		}
+		
+		listing.attr('page', page + 1);
+		listing.find('.list').append(results);
 		
 		if (callback) {
 			callback(results);
