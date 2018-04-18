@@ -68,7 +68,7 @@
 				{{#project.milestones.weekly}}
 					<label>
 						<span class="title">Week {{math @index '+' 1}} Goal</span>
-						<input name="milestones[weekly][{{@index}}]" type="text" value="{{this}}" />
+						<textarea name="milestones[weekly][{{@index}}]">{{this}}</textarea>
 					</label>
 				{{/project.milestones.weekly}}
 			</div>
