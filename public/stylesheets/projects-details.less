@@ -55,6 +55,14 @@
 				&:first-child {
 					margin-left: 0;
 				}
+
+				a {
+					color: lighten(@color-dark, 50%);
+
+					&:active, &:hover {
+					color: lighten(@color-dark, 25%);
+					}
+				}
 			}
 		}
 
