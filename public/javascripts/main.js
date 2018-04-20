@@ -1,23 +1,23 @@
 requirejs([
 	'/javascripts/vendor/jquery.min.js',
 	'/javascripts/vendor/underscore.min.js'
-], function() {
+], function () {
 	$(document).ready(function () {
-		$('[modal]').on('click', function(){
+		$('[modal]').on('click', function () {
 			var url = $(this).attr('modal');
 			
 			showModal(url);
 		});
 		
-		$('body').on('click', '.modal .cancel', function(){
+		$('body').on('click', '.modal .cancel', function () {
 			if ($('.modal').length <= 1) {
 				$('#modal-wrapper').removeClass('visible');
 			}
 			
-			$(this).closest('.modal').fadeOut(function(){
+			$(this).closest('.modal').fadeOut(function () {
 				$(this).remove();
 			});
-		}).on('click', '.modal .tabs li', function(){
+		}).on('click', '.modal .tabs li', function () {
 			var modal = $(this).closest('.modal');
 			var index = $(this).index();
 			
@@ -26,15 +26,15 @@ requirejs([
 			
 			modal.find('.tab').hide();
 			modal.find('.tab:eq(' + index + ')').show();
-		}).on('click', '.select', function(e){
+		}).on('click', '.select', function (e) {
 			e.preventDefault();
 			e.stopImmediatePropagation();
-		}).on('click', '.submit', function(){
-			var form = $(this).closest('form');
+		}).on('click', '.submit', function () {
+			var form  = $(this).closest('form');
 			var error = false;
 			
 			form.find('.error').removeClass('error');
-			form.find('[required]').each(function() {
+			form.find('[required]').each(function () {
 				if (!$(this).val().trim()) {
 					$(this).addClass('error');
 					error = true;
@@ -48,10 +48,10 @@ requirejs([
 	});
 });
 
-function showModal(url){
+function showModal(url) {
 	$('#modal-wrapper').addClass('visible');
 	
-	$.get(url, function(result){
+	$.get(url, function (result) {
 		$('#modal-wrapper').after(result);
 	});
 }

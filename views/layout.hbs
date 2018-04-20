@@ -64,5 +64,9 @@
 	gtag('js', new Date());
 	gtag('config', '{{ga_id}}');
 </script>
+{{#if isOwner}}
+	<link href="/stylesheets/vendor/simplemde.css" rel="stylesheet"/>
+	<script src="/javascripts/editor.js" type="text/javascript" async></script>
+{{/if}}
 </body>
 </html>

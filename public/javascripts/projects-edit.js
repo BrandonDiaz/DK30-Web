@@ -37,5 +37,8 @@ requirejs(['/javascripts/vendor/jquery.min.js'], function(){
 		$('[name="card[background][pattern]"]').on('change', function(){
 			preview.attr('pattern', $(this).val());
 		});
+		
+		// Boot up the markdown editors;
+		initEditors();
 	});
 });

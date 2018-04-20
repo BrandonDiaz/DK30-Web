@@ -12,7 +12,7 @@
 @import 'typography';
 
 html {
-	background: darken(@color-light, 5%);
+	background: @color-dark;
 	height: 100%;
 }
 
@@ -105,7 +105,8 @@ body {
 }
 
 #footer {
-	background: darken(@color-light, 5%);
+	background: @color-dark;
+	color: #ffffff;
 	height: @footer-height;
 	line-height: @footer-height;
 	position: absolute;
@@ -127,6 +128,16 @@ body {
 		em {
 			color: #f98185;
 			font-style: normal;
+		}
+	}
+
+	a {
+		color: rgba(255, 255, 255, 0.4);
+		opacity: 1;
+		transition: opacity 0.15s ease-in-out;
+
+		&:active, &:hover {
+			opacity: 0.75;
 		}
 	}
 }

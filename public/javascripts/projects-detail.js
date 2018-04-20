@@ -1,4 +1,4 @@
-requirejs(['/javascripts/vendor/jquery.min.js'], function() {
+requirejs(['/javascripts/vendor/jquery.min.js'], function () {
 	$(document).ready(function () {
 		if (window.location.hash && window.location.hash == '#edit') {
 			showModal(window.location.pathname + '/edit');
@@ -10,7 +10,7 @@ requirejs(['/javascripts/vendor/jquery.min.js'], function() {
 		
 		$('.media-add .confirm').on('click', function () {
 			var input = $(this).closest('.media-add').find('input')
-			var url = input.val();
+			var url   = input.val();
 			
 			if (url.length) {
 				// Reset the form state, append the URL to the media list.
@@ -23,7 +23,7 @@ requirejs(['/javascripts/vendor/jquery.min.js'], function() {
 			}
 		});
 		
-		$('body').on('click', '.media-links .fas', function(){
+		$('body').on('click', '.media-links .fas', function () {
 			$(this).closest('li').remove();
 		});
 	});
