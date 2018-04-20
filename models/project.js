@@ -35,7 +35,7 @@ var ProjectSchema = new mongoose.Schema({
 	}],
 	updates: [{
 		created: {type: Date, default: Date.now},
-		media: [String],
+		links: [String],
 		content: String
 	}],
 	views: {

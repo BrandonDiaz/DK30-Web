@@ -31,10 +31,8 @@
 							<textarea name="content" class="markdown-editor" required></textarea>
 							<ul class="media-links"></ul>
 							<div class="actions">
-								<span class="button float-left media-add">
-									<i class="fas fa-paperclip expand"></i>
-									<input type="text" placeholder="Paste Photo URL"/>
-									<i class="fas fa-plus confirm"></i>
+								<span class="float-left meta">
+									Markdown supported, HTML not so much
 								</span>
 								<span class="button float-right accent submit"><i class="fas fa-plus"></i> Publish Update</span>
 							</div>
@@ -49,16 +47,6 @@
 							<div class="content">
 								{{{markdown content}}}
 							</div>
-							<hr/>
-						{{/if}}
-						{{#if media}}
-							<ul class="media-grid cleared">
-								{{#media}}
-									<li>
-										<a class="card" href="{{this}}" target="_blank" style="background-image: url({{this}});"></a>
-									</li>
-								{{/media}}
-							</ul>
 							<hr/>
 						{{/if}}
 						<div class="meta float-right">
@@ -77,7 +65,7 @@
 				{{#project.milestones.weekly}}
 					{{#if this.length}}
 						<h3>Week {{math @index '+' 1}} Goal</h3>
-						<p class="markdown">{{this}}</p>
+						<p class="markdown">{{{markdown this}}}</p>
 					{{/if}}
 				{{/project.milestones.weekly}}
 				{{#if project.tags}}

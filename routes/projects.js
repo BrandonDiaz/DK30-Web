@@ -169,10 +169,8 @@ router.post('/:slug/edit', protected, function (req, res, next) {
 router.post('/:slug/update', protected, function (req, res, next) {
 	var update = {
 		'content': striptags(req.body.content),
-		'media': req.body.media
+		'links': req.body.links
 	};
-	
-	console.log('');
 	
 	if (!update.content) {
 		res.redirect('/projects/' + req.params.slug);
