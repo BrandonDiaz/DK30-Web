@@ -17,15 +17,16 @@ requirejs([
 			$(this).closest('.modal').fadeOut(function () {
 				$(this).remove();
 			});
-		}).on('click', '.modal .tabs li', function () {
-			var modal = $(this).closest('.modal');
+		}).on('click', '.tabs li', function () {
 			var index = $(this).index();
+			var set   = $(this).closest('.tabs').attr('set');
+			var tabs  = $('.tabbed[set="' + set + '"]');
 			
 			$(this).siblings().removeClass('active');
 			$(this).addClass('active');
 			
-			modal.find('.tab').hide();
-			modal.find('.tab:eq(' + index + ')').show();
+			tabs.children('.tab').hide();
+			tabs.children('.tab:eq(' + index + ')').show();
 		}).on('click', '.select', function (e) {
 			e.preventDefault();
 			e.stopImmediatePropagation();

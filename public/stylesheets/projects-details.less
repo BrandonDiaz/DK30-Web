@@ -60,7 +60,7 @@
 					color: lighten(@color-dark, 50%);
 
 					&:active, &:hover {
-					color: lighten(@color-dark, 25%);
+						color: lighten(@color-dark, 25%);
 					}
 				}
 			}
@@ -113,71 +113,6 @@
 			}
 		}
 	}
-
-	.actions {
-		line-height: 51px;
-
-		.media-add {
-			background: #ffffff;
-			border: 1px solid darken(@color-light, 5%);
-			height: 49px;
-			overflow: hidden;
-			padding: 0;
-			transition: border-color 0.5s ease, width 0.5s cubic-bezier(0.785, 0.135, 0.15, 0.86);
-			width: 49px;
-
-			&.expanded {
-				border: 1px solid darken(@color-light, 5%);
-				width: 302px;
-
-				.fas {
-					&.confirm {
-						opacity: 1;
-					}
-				}
-
-				input {
-					opacity: 1;
-				}
-			}
-
-			.fas, input {
-				float: left;
-			}
-
-			.fas {
-				color: darken(@color-light, 5%);
-				margin: 0;
-				margin-left: 1px;
-				padding: 17px;
-				transition: background 0.5s ease, color 0.5s ease, opacity 1s linear;
-				width: 16px;
-
-				&:hover {
-					color: darken(@color-light, 20%);
-				}
-
-				&.confirm {
-					background: darken(@color-light, 5%);
-					color: #ffffff;
-					opacity: 0;
-
-					&:hover {
-						background: darken(@color-light, 10%);
-					}
-				}
-			}
-
-			input {
-				border: none;
-				height: 50px;
-				line-height: 50px;
-				opacity: 0;
-				transition: opacity 1s linear;
-				width: 200px;
-			}
-		}
-	}
 }
 
 .media-grid {
@@ -197,12 +132,49 @@
 			cursor: pointer;
 			display: block;
 			height: 0;
-            padding-bottom: 100%;
+			padding-bottom: 100%;
 			transition: opacity 0.5s linear;
 
 			&:hover {
 				opacity: 0.75;
 			}
+		}
+	}
+}
+
+// TODO: can be segregated to project-edit
+.links-add {
+	background: #ffffff;
+	border: 1px solid darken(@color-light, 5%);
+	height: 49px;
+	overflow: hidden;
+	padding: 0;
+	position: relative;
+	transition: border-color 0.5s ease, width 0.5s cubic-bezier(0.785, 0.135, 0.15, 0.86);
+
+	input {
+		border: none;
+		float: left;
+		height: 50px;
+		line-height: 50px;
+		opacity: 0;
+		transition: opacity 1s linear;
+	}
+
+	.button {
+		background: darken(@color-light, 5%);
+		border-radius: 0 2px 2px 0;
+		bottom: 0;
+		color: white;
+		height: auto;
+		opacity: 1;
+		position: absolute;
+		right: 0;
+		top: 0;
+		transition: opacity 0.5s linear;
+
+		&:hover {
+			opacity: 0.75;
 		}
 	}
 }

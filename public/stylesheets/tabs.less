@@ -1,0 +1,52 @@
+.tabs {
+	list-style: none;
+
+	li {
+		cursor: pointer;
+		color: lighten(@color-dark, 50%);
+		float: left;
+		margin-left: 25px;
+		transition: opacity 0.15s ease-in-out;
+
+		&.active {
+			color: @color-links;
+		}
+
+		&:hover {
+			opacity:  0.5;
+		}
+	}
+}
+
+.tabbed {
+	> .tab {
+		display: none;
+
+		&:first-child {
+			display: block;
+		}
+	}
+}
+
+.modal {
+	.header {
+		.tabs {
+			float: right;
+			list-style: none;
+
+			li {
+				color: rgba(255, 255, 255, 0.4);
+				cursor: pointer;
+				float: left;
+				font-size:22px;
+				margin-left: 25px;
+				transition: color 0.15s ease-in-out;
+
+				&.active, &:active, &:hover {
+					color: #ffffff;
+					opacity: 1;
+				}
+			}
+		}
+	}
+}

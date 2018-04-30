@@ -104,6 +104,10 @@ hbs.registerHelper('math', function (value_1, operator, value_2) {
 	}[operator];
 });
 
+hbs.registerHelper('or', function(){
+	return Array.prototype.slice.call(arguments).some(Boolean);
+});
+
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 

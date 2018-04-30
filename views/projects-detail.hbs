@@ -6,7 +6,7 @@
 		</div>
 	{{/unless}}
 	<section class="project-masthead">
-		<div class="size-5 margin-left-0">
+		<div class="size-4 margin-left-0">
 			<h2>{{project.goal}}</h2>
 			<div class="float-left">
 				<a class="button owner" href="/users/{{project.owner.slug}}">
@@ -14,11 +14,20 @@
 				</a> in <span class="category meta">#{{project.category}}</span>
 			</div>
 		</div>
-		<div class="size-1 text-right">
-			{{#if isOwner}}
-				<span class="button accent" modal="/projects/{{project.slug}}/edit"><i class="fas fa-cog"></i> Edit Project</span>
-			{{else if user.slug}}
-				<a class="button {{ternary isFollowing 'grey' 'action'}}" href="/projects/{{project.slug}}/follow"><i class="fas fa-star"></i> {{ternary isFollowing 'Unfollow' 'Follow'}}</a>
+		<div class="size-2 text-right">
+			{{#if project.website}}
+				<div class="size-3 float-right">
+					<a class="button grey" href="{{project.website}}" target="_blank"><i class="fas fa-external-link-square-alt"></i> Website</a>
+				</div>
+			{{/if}}
+			{{#if (or isOwner user.slug)}}
+				<div class="size-3 float-right">
+					{{#if isOwner}}
+						<span class="button accent" modal="/projects/{{project.slug}}/edit"><i class="fas fa-cog"></i> Edit Project</span>
+					{{else if user.slug}}
+						<a class="button {{ternary isFollowing 'grey' 'action'}}" href="/projects/{{project.slug}}/follow"><i class="fas fa-star"></i> {{ternary isFollowing 'Unfollow' 'Follow'}}</a>
+					{{/if}}
+				</div>
 			{{/if}}
 		</div>
 	</section>
@@ -76,6 +85,21 @@
 								<a href="/?search={{.}}">{{.}}</a>
 							</li>
 						{{/project.tags}}
+					</ul>
+				{{/if}}
+				{{#if (or project.website project.download)}}
+					<h3>External Links</h3>
+					<ul>
+						{{#if project.website}}
+							<li>
+								<a href="{{project.website}}" target="_blank"><i class="fas fa-external-link-square-alt"></i> View Website</a>
+							</li>
+						{{/if}}
+						{{#if project.download}}
+							<li>
+								<a href="{{project.download}}" target="_blank"><i class="fas fa-external-link-square-alt"></i> Download Project</a>
+							</li>
+						{{/if}}
 					</ul>
 				{{/if}}
 			</div>

@@ -9,6 +9,7 @@
 @import 'listings';
 @import 'patterns';
 @import 'projects';
+@import 'tabs';
 @import 'typography';
 
 html {
@@ -184,29 +185,6 @@ body {
 			float: left;
 			font-size: 24px;
 		}
-
-		ul {
-			float: right;
-			list-style: none;
-
-			li {
-				border-bottom: 2px solid transparent;
-				color: rgba(255, 255, 255, 0.4);
-				cursor: pointer;
-				float: left;
-				margin-left: 50px;
-				transition: border-color 0.15s ease-in-out, color 0.15s ease-in-out;
-
-				&.active {
-					border-color: rgba(255, 255, 255, 0.4);
-				}
-
-				&.active, &:active, &:hover {
-					color: #ffffff;
-					border-color: #ffffff
-				}
-			}
-		}
 	}
 
 	.wrapper {
@@ -215,19 +193,20 @@ body {
 		width: auto;
 	}
 
-	.tab {
-		display: none;
-
-		&:first-child {
-			display: block;
-		}
-	}
-
 	.actions {
 		background: darken(@color-light, 5%);
+		border-radius: 0 0 2px 2px;
 		height: 51px;
 		line-height: 51px;
 		padding: 30px 40px;
+	}
+
+	.masthead {
+		padding: 0;
+
+		h5 {
+			font-size: 18px;
+		}
 	}
 }
 
@@ -271,6 +250,7 @@ body {
 hr {
 	border: none;
 	border-top: 1px solid darken(@color-light, 5%);
+	clear: both;
 	height: 0;
 	margin: 20px 0;
 }

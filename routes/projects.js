@@ -124,23 +124,26 @@ router.get('/:slug/edit', protected, function (req, res, next) {
 // Edit form posts here to update a project
 router.post('/:slug/edit', protected, function (req, res, next) {
 	var update = {
-		'goal': req.body.goal,
-		'description': req.body.description,
-		'category': req.body.category,
-		'visible': req.body.visible == 'true',
-		'card.background.color': req.body['card[background][color]'],
-		'card.background.pattern': req.body['card[background][pattern]'],
-		'milestones.weekly.0': req.body['milestones[weekly][0]'],
-		'milestones.weekly.1': req.body['milestones[weekly][1]'],
-		'milestones.weekly.2': req.body['milestones[weekly][2]'],
-		'milestones.weekly.3': req.body['milestones[weekly][3]'],
-		'tags': req.body.tags
+		'goal'     : req.body.goal,
+		'tags'     : req.body.tags,
+		'category' : req.body.category,
+		'visible'  : req.body.visible == 'true',
+		'website'  : req.body['links[website]'],
+		'download' : req.body['links[download]'],
+		'card.background.color'   : req.body['card[background][color]'],
+		'card.background.pattern' : req.body['card[background][pattern]'],
+		'milestones.weekly.0' : req.body['milestones[weekly][0]'],
+		'milestones.weekly.1' : req.body['milestones[weekly][1]'],
+		'milestones.weekly.2' : req.body['milestones[weekly][2]'],
+		'milestones.weekly.3' : req.body['milestones[weekly][3]']
 	};
 	
 	// Tags are always stored as an array, but displayed as a string when editing.
 	update.tags = update.tags.split(',').map(function (tag) {
 		return tag.trim();
 	});
+	
+	console.log('UPDATE', update);
 	
 	Project.findOne({
 		'slug': req.params.slug
