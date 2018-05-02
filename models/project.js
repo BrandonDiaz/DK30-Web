@@ -3,8 +3,7 @@ var User     = require('./user');
 
 var ProjectSchema = new mongoose.Schema({
 	slug: String,
-	goal: {ty
-	pe: String, default: 'Accomplish something incredible.'},
+	goal: {type: String, default: 'Accomplish something incredible.'},
 	website  : String,
 	download : String,
 	category: {type: String, default: 'Other'},
