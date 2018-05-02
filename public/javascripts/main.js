@@ -27,6 +27,8 @@ requirejs([
 			
 			tabs.children('.tab').hide();
 			tabs.children('.tab:eq(' + index + ')').show();
+			
+			refreshEditors();
 		}).on('click', '.select', function (e) {
 			e.preventDefault();
 			e.stopImmediatePropagation();
