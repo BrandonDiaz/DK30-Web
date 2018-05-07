@@ -1,5 +1,5 @@
 <{{ternary static 'span' 'a'}} href="/projects/{{slug}}" class="project" color="{{card.background.color}}" pattern="{{card.background.pattern}}">
-
+	{{#if isFollowing}}<i class="fas fa-star following"></i>{{/if}}
 </{{ternary static 'span' 'a'}}>
 {{#unless cardOnly}}
 	<div class="caption">

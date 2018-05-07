@@ -52,6 +52,10 @@ router.get('/list/:page', function (req, res, next) {
 	}).exec(function (err, projects) {
 		console.log('RESPONSE', err, projects);
 		
+		projects.map(function(project){
+			project.isFollowing = res.locals.user && project.followers.indexOf(mongoose.Types.ObjectId(res.locals.user._id)) > -1;
+		});
+		
 		res.render('projects-list', {
 			layout: false,
 			projects: projects
