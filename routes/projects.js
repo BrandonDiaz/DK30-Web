@@ -1,8 +1,9 @@
-var express   = require('express');
-var striptags = require('striptags');
-var mongoose  = require('mongoose');
-var cache     = require('express-redis-cache')();
-var router    = express.Router();
+var express    = require('express');
+var striptags  = require('striptags');
+var mongoose   = require('mongoose');
+var cache      = require('express-redis-cache')();
+var router     = express.Router();
+var categories = require('../models/categories');
 
 var Project = require('../models/project');
 var protected = require('../middleware/protected');
@@ -120,7 +121,8 @@ router.get('/:slug/edit', protected, function (req, res, next) {
 		
 		res.render('projects-edit', {
 			layout: 'modal',
-			project: project
+			project: project,
+			categories: categories
 		});
 	});
 });
@@ -147,7 +149,10 @@ router.post('/:slug/edit', protected, function (req, res, next) {
 		return tag.trim();
 	});
 	
-	console.log('UPDATE', update);
+	if (categories.list.indexOf(update.category) == -1) {
+		res.redirect('/error');
+		return false;
+	}
 	
 	Project.findOne({
 		'slug': req.params.slug

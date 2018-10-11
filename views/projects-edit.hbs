@@ -43,16 +43,9 @@
 							<input name="category" type="hidden" value="{{project.category}}"/>
 							<div class="input"></div>
 							<ul>
-								<li value="Other">Other</li>
-								<li value="CraftsAndCosplay">Crafts and Cosplay</li>
-								<li value="CodeAndEngineering">Code and Engineering</li>
-								<li value="EducationAndCareer">Education and Career</li>
-								<li value="GameDev">Game Development</li>
-								<li value="GamesAndStreams">Games and Streams</li>
-								<li value="HealthAndFitness">Health and Fitness</li>
-								<li value="Music">Music</li>
-								<li value="VisualArt">Visual Art</li>
-								<li value="Writing">Writing</li>
+								{{#categories.list}}
+									<li value="{{.}}">{{.}}</li>
+								{{/categories.list}}
 							</ul>
 						</a>
 					</label>
