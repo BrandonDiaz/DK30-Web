@@ -26,3 +26,18 @@ At a minimum, you'll need Node.js installed, a LESS compiler, and access to a Mo
 `$ sh bootstrap.sh`
 
 This application uses Discord for authentication, and you'll need to [create an application](https://discordapp.com/developers/applications/me) for testing purposes. Once it's set up, add your Client ID/Secret to the .env file.
+
+# Env file minimum setup
+
+This example uses localhost default configuration for your `.env` file
+```
+DISCORD_CLIENT_ID=<your discord app id>
+DISCORD_CLIENT_SECRET=<your discord client secret>
+DISCORD_CALLBACK_URL=http://127.0.0.1:3000/users/auth/discord/callback
+SESSION_SECRET=dev-secret
+DB_HOST=localhost
+DB_PORT=27017
+DB_NAME=test
+NODE_APP_INSTANCE=1
+```
+
